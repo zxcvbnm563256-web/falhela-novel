@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم الأغاني - Falhla X Ssong live</title>
+    <style>
+        /* ثيم فلهلا المظلم */
+        body {
+            background-color: #030303;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* زر الرجوع */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff7f;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+
+        /* كرت الأغنية الاحترافي */
+        .song-card {
+            background: linear-gradient(135deg, #0f0f0f, #050505);
+            border: 1px solid #161616;
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.8);
+        }
+
+        /* إطار الغلاف الفخم */
+        .track-cover-container {
+            width: 220px;
+            height: 220px;
+            background-color: #090909;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            border: 1px solid #1f1f1f;
+        }
+
+        .track-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* نصوص الأغنية بناءً على طلبكِ */
+        .song-title {
+            font-size: 21px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0 0 6px 0;
+            font-family: monospace, sans-serif;
+        }
+
+        .artist-name {
+            font-size: 14px;
+            color: #00ff7f;
+            margin: 0 0 25px 0;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* واجهة المشغل المخصص الجديد */
+        .custom-player {
+            width: 100%;
+            background-color: #090909;
+            border: 1px solid #1c1c1c;
+            border-radius: 10px;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* زر التشغيل الدائري الفخم */
+        .play-btn {
+            background: #00ff7f;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* أيقونة زر التشغيل والإيقاف بالـ SVG */
+        .play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #000000;
+        }
+
+        /* توقيت الأغنية */
+        .time-display {
+            font-size: 13px;
+            color: #888888;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        /* شريط تقدم الأغنية الأنيق (Timeline) */
+        .timeline-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 5px;
+            border-radius: 3px;
+            background: #222222;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* التحكم بشكل النقطة في شريط التقدم لقسم الأغاني */
+        .timeline::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff7f;
+            box-shadow: 0 0 6px #00ff7f;
+            cursor: pointer;
+        }
+
+        .timeline::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff7f;
+            box-shadow: 0 0 6px #00ff7f;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
+
+        <div class="song-card">
+            
+            <!-- غلاف الأغنية المخصص -->
+            <div class="track-cover-container">
+                <img src="./introduction.png" alt="Cover" class="track-cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100%\' height=\'100%\' fill=\'%23090909\'/><text x=\'50%\' y=\'55%\' font-size=\'7\' fill=\'%23333\' text-anchor=\'middle\' font-family=\'sans-serif\'>NO COVER</text></svg>'">
+            </div>
+
+            <!-- اسم الأغنية وحقوقكِ المعتمدة -->
+            <h2 class="song-title">Title:the introduction</h2>
+            <p class="artist-name">Writer: Maha Abdul Rahman</p>
+            
+            <!-- عنصر الصوت المخفي المربوط بالمشغل المطور -->
+            <audio id="mainAudio" src="./introduction.mp3"></audio>
+
+            <!-- واجهة المشغل الفخمة الجديدة -->
+            <div class="custom-player">
+                <div class="player-controls">
+                    
+                    <!-- زر تشغيل مخصص مبرمج ذاتياً -->
+                    <button class="play-btn" id="playBtn" onclick="togglePlay()">
+                        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+
+                    <!-- العداد الزمني المطور -->
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                    </div>
+
+                </div>
+
+                <!-- شريط الوقت المدمج -->
+                <div class="timeline-container">
+                    <input type="range" id="timeline" class="timeline" value="0" min="0" step="1">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- برمجة تشغيل الصوت وتحديث شريط التقدم تلقائياً -->
+    <script>
+        const audio = document.getElementById('mainAudio');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const currentTimeText = document.getElementById('currentTime');
+        const durationText = document.getElementById('duration');
+        const timeline = document.getElementById('timeline');
+
+        // مسارات أيقونات التشغيل والإيقاف المؤقت (SVG)
+        const playPath = "M8 5v14l11-7z";
+        const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.innerHTML = `<path d="${pausePath}"/>`;
+            } else {
+                audio.pause();
+                playIcon.innerHTML = `<path d="${playPath}"/>`;
+            }
+        }
+
+        // تنسيق الوقت بالدقائق والثواني بشكل نظيف
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // تحديث البيانات عند تحميل الأغنية
+        audio.addEventListener('loadedmetadata', () => {
+            durationText.textContent = formatTime(audio.duration);
+            timeline.max = Math.floor(audio.duration);
+        });
+
+        // تحديث شريط التقدم والوقت الحالي أثناء التشغيل
+        audio.addEventListener('timeupdate', () => {
+            timeline.value = Math.floor(audio.currentTime);
+            currentTimeText.textContent = formatTime(audio.currentTime);
+        });
+
+        // السماح للمستخدم بتقديم أو تأخير الأغنية من الشريط بنفسه
+        timeline.addEventListener('input', () => {
+            audio.currentTime = timeline.value;
+        });
+
+        // إعادة الزر لشكل التشغيل عند انتهاء الأغنية تماماً
+        audio.addEventListener('ended', () => {
+            playIcon.innerHTML = `<path d="${playPath}"/>`;
+            timeline.value = 0;
+            currentTimeText.textContent = "0:00";
+        });
+    </script>
+
+</body>
+</html>

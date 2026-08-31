@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم الروايات - فلهلا</title>
+    <style>
+        /* ثيم فلهلا المظلم */
+        body {
+            background-color: #030303;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* زر الرجوع */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff7f;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+        }
+
+        /* شريط البحث */
+        .search-container {
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            background-color: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #ffffff;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-input:focus {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.2), inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* قائمة الكروت */
+        .novel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* كرت الرواية */
+        .novel-card {
+            background: linear-gradient(135deg, #121212, #070707);
+            border: 1px solid #161616;
+            border-radius: 8px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+        }
+
+        .novel-card:hover {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.15);
+        }
+
+        .novel-title {
+            font-size: 19px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .novel-desc {
+            font-size: 14px;
+            color: #aaaaaa;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* زر تصفح الفصول */
+        .read-btn {
+            background: #00ff7f;
+            color: #000000;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            transition: background 0.3s ease;
+            align-self: flex-start;
+            margin-top: 5px;
+        }
+
+        .read-btn:hover {
+            background: #00cc66;
+        }
+
+        /* رسالة عدم وجود نتائج */
+        .no-results {
+            display: none;
+            color: #666;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
+
+        <h1>📚 قسم الروايات</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم الرواية...">
+        </div>
+
+        <div class="novel-list" id="novelList">
+            
+            <div class="novel-card">
+                <h2 class="novel-title">فلهلا مجلس الامم</h2>
+                <!-- هنا تم وضع الرقم 1 فقط بناءً على طلبكِ -->
+                <p class="novel-desc">1</p>
+                <a href="chapters-falhela.html" class="read-btn">تصفح الفصول</a>
+            </div>
+
+        </div>
+
+        <div class="no-results" id="noResults">لم يتم العثور على روايات بهذا الاسم.</div>
+
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const novelCards = document.querySelectorAll('.novel-card');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            const filter = searchInput.value.trim().toLowerCase();
+            let hasVisibleCard = false;
+
+            novelCards.forEach(card => {
+                const title = card.querySelector('.novel-title').textContent.toLowerCase();
+                if (title.includes(filter)) {
+                    card.style.display = 'flex';
+                    hasVisibleCard = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (hasVisibleCard) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>

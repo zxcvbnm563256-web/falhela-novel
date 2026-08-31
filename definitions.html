@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موسوعة التعريفات - فلهلا</title>
+    <style>
+        /* ثيم فلهلا المظلم */
+        body {
+            background-color: #030303;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* زر الرجوع للمنصة الرئيسية */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff7f;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+        }
+
+        /* شريط البحث عن التعريفات */
+        .search-container {
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            background-color: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #ffffff;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-input:focus {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.2);
+        }
+
+        /* قائمة المصطلحات والتعريفات */
+        .definitions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* كرت التعريف */
+        .definition-card {
+            background: linear-gradient(135deg, #121212, #070707);
+            border: 1px solid #161616;
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+        }
+
+        .definition-card:hover {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.15);
+        }
+
+        .term-title {
+            font-size: 19px;
+            font-weight: bold;
+            color: #00ff7f;
+            margin: 0 0 10px 0;
+        }
+
+        .term-text {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-line;
+        }
+
+        /* رسالة عدم وجود نتائج */
+        .no-results {
+            display: none;
+            color: #666;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
+
+        <h1>📑 موسوعة التعريفات</h1>
+        
+        <div class="search-container">
+            <input type="text" id="defSearch" class="search-input" placeholder="ابحث عن المفهوم أو المصطلح...">
+        </div>
+
+        <div class="definitions-list" id="definitionsList">
+            
+            <div class="definition-card">
+                <h2 class="term-title">اتحاد الأبعاد المستقلة</h2>
+                <p class="term-text">اتحاد تكون بعد حروب اهليه كثيره بين 90 من الابعاد و تم توحيده من قبل ملك فلهلا ابرز انجزاته اول اتحاد يجمع جميع الاديان و اعراق تحت سلطه واحده و رايه واحده ثالث اكبر اتحاد قوه عسكريه ثاني اغني اقتصاد الاتحاد يتكون من ملك فلهلا و اعضاء اتحاد الثلاثه عشر يتميز الاتحاد بي ثاني اقوي شخص في العوالم الملك فلهلا و هوا الاتحاد الذي خرج من تأسيس الامم البعديه عن طريق اخ/اخت ملك فلهلا جيكر </p>
+            </div>
+
+        </div>
+
+        <div class="no-results" id="noResults">لم يتم العثور على أي تعريفات بهذا الاسم.</div>
+
+    </div>
+
+    <script>
+        const defSearch = document.getElementById('defSearch');
+        const defCards = document.querySelectorAll('.definition-card');
+        const noResults = document.getElementById('noResults');
+
+        defSearch.addEventListener('input', function() {
+            const filter = defSearch.value.trim().toLowerCase();
+            let hasVisibleCard = false;
+
+            defCards.forEach(card => {
+                const title = card.querySelector('.term-title').textContent.toLowerCase();
+                if (title.includes(filter)) {
+                    card.style.display = 'block';
+                    hasVisibleCard = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (hasVisibleCard) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>

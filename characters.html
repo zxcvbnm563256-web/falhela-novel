@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقات الشخصيات - فلهلا</title>
+    <style>
+        /* ثيم فلهلا المظلم */
+        body {
+            background-color: #030303;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* زر الرجوع للمنصة الرئيسية */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff7f;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+        }
+
+        /* شريط البحث عن الشخصيات */
+        .search-container {
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            background-color: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #ffffff;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-input:focus {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.2);
+        }
+
+        /* قائمة بطاقات الشخصيات */
+        .characters-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* كرت الشخصية الفخم */
+        .character-card {
+            background: linear-gradient(135deg, #121212, #070707);
+            border: 1px solid #161616;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            border-color: #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.15);
+        }
+
+        /* حاوية الصورة المحددة الأبعاد لمنع تداخل المحتوى */
+        .character-image-container {
+            width: 100%;
+            height: 280px;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 1px solid #161616;
+        }
+
+        .character-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* لقص الصورة بشكل متناسق داخل الإطار بدون تمطيط */
+        }
+
+        /* تفاصيل البيانات بداخل الكرت */
+        .character-info {
+            padding: 20px;
+        }
+
+        .character-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 8px;
+        }
+
+        /* جدول البيانات الأساسية للشخصية */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .info-table td {
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .info-table .label {
+            color: #00ff7f;
+            font-weight: bold;
+            width: 35%;
+        }
+
+        .info-table .value {
+            color: #cccccc;
+        }
+
+        /* رسالة عدم وجود نتائج */
+        .no-results {
+            display: none;
+            color: #666;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
+
+        <h1>👤 بطاقات الشخصيات</h1>
+        
+        <div class="search-container">
+            <input type="text" id="charSearch" class="search-input" placeholder="ابحث عن اسم الشخصية...">
+        </div>
+            <div class="character-card">
+                
+                <div class="character-image-container">
+                    <img src="./jon.png" alt="اسم الشخصية الثانية" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+
+                <div class="character-info">
+                    <h2 class="character-name">جون</h2>
+                    
+                    <table class="info-table">
+                        <tr>
+                            <td class="label">العمر:</td>
+                            <td class="value">210</td>
+                        </tr>
+                        <tr>
+                            <td class="label">السلاح:</td>
+                            <td class="value"> سلاح ناري نظرات تحكم في المسيرات انشاء بوبات التنقل الكمي</td>
+                        </tr>
+                        <tr>
+                            <td class="label"> الانتماء:</td>
+                            <td class="value">اتحاد الابعاد المستقله</td>
+                        </tr>
+                        <tr>
+                            <td class="label">نبذة:</td>
+                            <td class="value">[جنس ذكر] قائد فرقه حرس حدود و جناح عسكري رقم د في جيش و فرقه عمليات الخاصه رقم 4 </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="character-card">
+                
+                <div class="character-image-container">
+                    <img src="./shadow.png" alt="اسم الشخصية الثالثة" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+
+                <div class="character-info">
+                    <h2 class="character-name">شادو</h2>
+                    
+                    <table class="info-table">
+                        <tr>
+                            <td class="label">العمر:</td>
+                            <td class="value">350</td>
+                        </tr>
+                        <tr>
+                            <td class="label">السلاح:</td>
+                            <td class="value">يد الظلام يستطيع اطلاق قوه من يده الحديديه اليسري و تدمير اكوان كامله بها</td>
+                        </tr>
+                        <tr>
+                            <td class="label"> الانتماء:</td>
+                            <td class="value">اتحاد الابعاد المستقله</td>
+                        </tr>
+                        <tr>
+                            <td class="label">نبذة:</td>
+                            <td class="value"> [الجنس:ذكر]  مستشار جولي و احد اعضاء مجلس الامم البعديه و احد قاده الظلام الاربعه و سيد الظلام</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        <div class="characters-grid" id="charactersGrid">
+            
+            <!-- كرت شخصية تجريبي مجهز بمكان الصورة -->
+            <div class="character-card">
+                
+     
+                <div class="character-image-container">
+                    <img src="./falhla.png" alt="صورة الشخصية" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+
+                <div class="character-info">
+                    <h2 class="character-name"> فلهلا</h2>
+                    
+                    <table class="info-table">
+                        <tr>
+                            <td class="label">العمر:</td>
+                            <td class="value"> غير محدد</td>
+                        </tr>
+                        <tr>
+                            <td class="label">القدرة / السلاح:</td>
+                            <td class="value">غير محدود</td>
+                        </tr>
+                        <tr>
+                            <td class="label">الانتماء:</td>
+                            <td class="value">اتحاد الابعاد المستقله</td>
+                        </tr>
+                        <tr>
+                            <td class="label">نبذة:</td>
+                            <td class="value"> [جنس: ذكر] 
+                              
+                              ملك اتحاد الابعاد المستقله و احد تلاميذ المعلم الاول</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+            <div class="character-card">
+                <div class="character-image-container">
+                    <img src="./Jeker.jpg" alt="اسم الشخصية الثانية" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+                <div class="character-info">
+                    <h2 class="character-name">جيكر</h2>
+                    <table class="info-table">
+                        <tr><td class="label">العمر:</td><td class="value">غير محدد</td></tr>
+                        <tr><td class="label">السلاح:</td><td class="value">غير محدود</td></tr>
+                        <tr><td class="label">الانتماء:</td><td class="value">مجلس الامم البعديه/اتحاد الابعاد مستقله</td></tr>
+                        <tr><td class="label">نبذة:</td><td class="value">[جنس:ثنائي جنس] اخ فلهلا و رائيس مجلس الامم بعديه و اقوي شخص في عوالم و احد تلاميذ معلم الاول يختم بقناعه كل شر في عوالم اذا دمر قناعه او اختفي قناعه سيغرق العالم في شر الي الابد جيكر سيد الشر</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image-container">
+                    <img src="./Julie.png" alt="اسم الشخصية الثالثة" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+                <div class="character-info">
+                    <h2 class="character-name">جولي</h2>
+                    <table class="info-table">
+                        <tr><td class="label">العمر:</td><td class="value">2000000</td></tr>
+                        <tr><td class="label">السلاح:</td><td class="value">التحكم في واقع يحرك اي شي يريده لديه خريطه الابعاد يسطيع عرضها امامه و تدمير ما يريد بها و سوف يدمر ايضا في واقع</td></tr>
+                        <tr><td class="label">الانتماء:</td><td class="value">اتحاد الابعاد المستقله</td></tr>
+                        <tr><td class="label">نبذة:</td><td class="value">بن جيكر و احد الاعضاء الثلاثه عشر في اتحاد الابعاد المستقله</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image-container">
+                    <img src="./Matar.png" alt="اسم الشخصية الرابعة" class="character-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'55%\' font-size=\'8\' fill=\'%23444\' text-anchor=\'middle\' font-family=\'sans-serif\'>لم يتم إرفاق صورة بعد</text></svg>'">
+                </div>
+                <div class="character-info">
+                    <h2 class="character-name">مطر</h2>
+                    <table class="info-table">
+                        <tr><td class="label">العمر:</td><td class="value">24</td></tr>
+                        <tr><td class="label">السلاح:</td><td class="value">عصا سحر و تحكم الذهني</td></tr>
+                        <tr><td class="label">الانتماء:</td><td class="value">مملكه الابعاد مستقله</td></tr>
+                        <tr><td class="label">نبذة:</td><td class="value">اخت فلهلا و احد اقوي ساحرات في عالم قائده فيلق ساحرات و ملكه مملكه اسكفرديا </td></tr>
+                    </table>
+                </div>
+            </div>
+
+        <div class="no-results" id="noResults">لم يتم العثور على شخصيات بهذا الاسم.</div>
+
+    </div>
+
+    <script>
+        const charSearch = document.getElementById('charSearch');
+        const charCards = document.querySelectorAll('.character-card');
+        const noResults = document.getElementById('noResults');
+
+        charSearch.addEventListener('input', function() {
+            const filter = charSearch.value.trim().toLowerCase();
+            let hasVisibleCard = false;
+
+            charCards.forEach(card => {
+                const name = card.querySelector('.character-name').textContent.toLowerCase();
+                if (name.includes(filter)) {
+                    card.style.display = 'block';
+                    hasVisibleCard = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (hasVisibleCard) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>

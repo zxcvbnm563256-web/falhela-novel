@@ -227,6 +227,38 @@
             </div>
 
         </div>
+<!-- كارت الأغنية الجديدة -->
+<div class="song-card">
+    <div class="track-cover-container">
+        <!-- ضع اسم ملف صوره الأغنية هنا بدلاً من new_cover.png -->
+        <img src="./homeland.png" alt="Cover" class="track-cover">
+    </div>
+
+    <!-- اكتب اسم الأغنية هنا بدلاً من اسم الأغنية الجديدة -->
+    <h2 class="song-title">Title: homeland</h2>
+    <p class="artist-name">Writer: Maha Abdul Rahman
+    Mohammed Joseph 
+    Ibrahim Kazoui</p>
+    
+    <!-- ضع اسم ملف الأغنية هنا بدلاً من new_song.mp3 (مع تغيير audio2 إلى audio3 إذا أضفت أغنية ثالثة) -->
+    <audio id="audio2" src="./homeland.mp3"></audio>
+
+    <div class="custom-player">
+        <div class="player-controls">
+            <button class="play-btn" onclick="togglePlayAudio('audio2', this)">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+
+            <div class="time-display">
+                <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
+            </div>
+        </div>
+
+        <div class="timeline-container">
+            <input type="range" class="timeline" value="0" min="0" step="1">
+        </div>
+    </div>
+</div>
 
     </div>
 

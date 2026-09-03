@@ -51,6 +51,7 @@
             align-items: center;
             text-align: center;
             box-shadow: 0 12px 24px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
         }
 
         /* إطار الغلاف الفخم */
@@ -71,7 +72,7 @@
             object-fit: cover;
         }
 
-        /* نصوص الأغنية بناءً على طلبكِ */
+        /* نصوص الأغنية */
         .song-title {
             font-size: 21px;
             font-weight: bold;
@@ -88,7 +89,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* واجهة المشغل المخصص الجديد */
+        /* واجهة المشغل المخصص */
         .custom-player {
             width: 100%;
             background-color: #090909;
@@ -127,7 +128,6 @@
             transform: scale(0.95);
         }
 
-        /* أيقونة زر التشغيل والإيقاف بالـ SVG */
         .play-btn svg {
             width: 16px;
             height: 16px;
@@ -142,7 +142,7 @@
             user-select: none;
         }
 
-        /* شريط تقدم الأغنية الأنيق (Timeline) */
+        /* شريط تقدم الأغنية (Timeline) */
         .timeline-container {
             width: 100%;
             display: flex;
@@ -160,7 +160,6 @@
             cursor: pointer;
         }
 
-        /* التحكم بشكل النقطة في شريط التقدم لقسم الأغاني */
         .timeline::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -189,145 +188,129 @@
         
         <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
 
+        <!-- الأغنية الأولى -->
         <div class="song-card">
-            
-            <!-- غلاف الأغنية المخصص -->
             <div class="track-cover-container">
                 <img src="./introduction.png" alt="Cover" class="track-cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100%\' height=\'100%\' fill=\'%23090909\'/><text x=\'50%\' y=\'55%\' font-size=\'7\' fill=\'%23333\' text-anchor=\'middle\' font-family=\'sans-serif\'>NO COVER</text></svg>'">
             </div>
 
-            <!-- اسم الأغنية وحقوقكِ المعتمدة -->
-            <h2 class="song-title">Title:the introduction</h2>
+            <h2 class="song-title">Title: the introduction</h2>
             <p class="artist-name">Writer: Maha Abdul Rahman</p>
             
-            <!-- عنصر الصوت المخفي المربوط بالمشغل المطور -->
-            <audio id="mainAudio" src="./introduction.mp3"></audio>
+            <audio id="audio1" src="./introduction.mp3"></audio>
 
-            <!-- واجهة المشغل الفخمة الجديدة -->
             <div class="custom-player">
                 <div class="player-controls">
-                    
-                    <!-- زر تشغيل مخصص مبرمج ذاتياً -->
-                    <button class="play-btn" id="playBtn" onclick="togglePlay()">
-                        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <button class="play-btn" onclick="togglePlayAudio('audio1', this)">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
 
-                    <!-- العداد الزمني المطور -->
                     <div class="time-display">
-                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                        <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
                     </div>
-
                 </div>
 
-                <!-- شريط الوقت المدمج -->
                 <div class="timeline-container">
-                    <input type="range" id="timeline" class="timeline" value="0" min="0" step="1">
+                    <input type="range" class="timeline" value="0" min="0" step="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- الأغنية الثانية -->
+        <div class="song-card">
+            <div class="track-cover-container">
+                <img src="./homeland.png" alt="Cover" class="track-cover">
+            </div>
+
+            <h2 class="song-title">Title: homeland</h2>
+            <p class="artist-name">Writer: Maha Abdul Rahman<br>Mohammed Joseph Ibrahim Kazoui</p>
+            
+            <audio id="audio2" src="./homeland.mp3"></audio>
+
+            <div class="custom-player">
+                <div class="player-controls">
+                    <button class="play-btn" onclick="togglePlayAudio('audio2', this)">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+
+                    <div class="time-display">
+                        <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
+                    </div>
                 </div>
 
-            </div>
-
-        </div>
-<!-- كارت الأغنية الجديدة -->
-<div class="song-card">
-    <div class="track-cover-container">
-        <!-- ضع اسم ملف صوره الأغنية هنا بدلاً من new_cover.png -->
-        <img src="./homeland.png" alt="Cover" class="track-cover">
-    </div>
-
-    <!-- اكتب اسم الأغنية هنا بدلاً من اسم الأغنية الجديدة -->
-    <h2 class="song-title">Title: homeland</h2>
-    <p class="artist-name">Writer: Maha Abdul Rahman
-    Mohammed Joseph 
-    Ibrahim Kazoui</p>
-    
-    <!-- ضع اسم ملف الأغنية هنا بدلاً من new_song.mp3 (مع تغيير audio2 إلى audio3 إذا أضفت أغنية ثالثة) -->
-    <audio id="audio2" src="./homeland.mp3"></audio>
-
-    <div class="custom-player">
-        <div class="player-controls">
-            <button class="play-btn" onclick="togglePlayAudio('audio2', this)">
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-
-            <div class="time-display">
-                <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
+                <div class="timeline-container">
+                    <input type="range" class="timeline" value="0" min="0" step="1">
+                </div>
             </div>
         </div>
 
-        <div class="timeline-container">
-            <input type="range" class="timeline" value="0" min="0" step="1">
-        </div>
-    </div>
-</div>
-
     </div>
 
-    <!-- برمجة تشغيل الصوت وتحديث شريط التقدم تلقائياً -->
-<script>
-    const playPath = "M8 5v14l11-7z";
-    const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+    <!-- برمجة المشغل -->
+    <script>
+        const playPath = "M8 5v14l11-7z";
+        const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 
-    function formatTime(seconds) {
-        if (isNaN(seconds)) return "0:00";
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    }
-
-    function togglePlayAudio(audioId, btnElement) {
-        const audio = document.getElementById(audioId);
-        const svg = btnElement.querySelector('svg');
-
-        document.querySelectorAll('audio').forEach(a => {
-            if (a.id !== audioId) {
-                a.pause();
-                const otherBtn = a.closest('.song-card').querySelector('.play-btn svg');
-                if (otherBtn) otherBtn.innerHTML = `<path d="${playPath}"/>`;
-            }
-        });
-
-        if (audio.paused) {
-            audio.play();
-            svg.innerHTML = `<path d="${pausePath}"/>`;
-        } else {
-            audio.pause();
-            svg.innerHTML = `<path d="${playPath}"/>`;
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
-    }
 
-    document.querySelectorAll('.song-card').forEach(card => {
-        const audio = card.querySelector('audio');
-        const durationText = card.querySelector('.duration-time');
-        const currentTimeText = card.querySelector('.current-time');
-        const timeline = card.querySelector('.timeline');
-        const svg = card.querySelector('.play-btn svg');
+        function togglePlayAudio(audioId, btnElement) {
+            const audio = document.getElementById(audioId);
+            const svg = btnElement.querySelector('svg');
 
-        if (audio) {
-            audio.addEventListener('loadedmetadata', () => {
-                durationText.textContent = formatTime(audio.duration);
-                timeline.max = Math.floor(audio.duration);
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== audioId) {
+                    a.pause();
+                    const otherBtn = a.closest('.song-card').querySelector('.play-btn svg');
+                    if (otherBtn) otherBtn.innerHTML = `<path d="${playPath}"/>`;
+                }
             });
 
-            audio.addEventListener('timeupdate', () => {
-                timeline.value = Math.floor(audio.currentTime);
-                currentTimeText.textContent = formatTime(audio.currentTime);
-            });
+            if (audio.paused) {
+                audio.play();
+                svg.innerHTML = `<path d="${pausePath}"/>`;
+            } else {
+                audio.pause();
+                svg.innerHTML = `<path d="${playPath}"/>`;
+            }
+        }
 
-            if (timeline) {
-                timeline.addEventListener('input', () => {
-                    audio.currentTime = timeline.value;
+        document.querySelectorAll('.song-card').forEach(card => {
+            const audio = card.querySelector('audio');
+            const durationText = card.querySelector('.duration-time');
+            const currentTimeText = card.querySelector('.current-time');
+            const timeline = card.querySelector('.timeline');
+            const svg = card.querySelector('.play-btn svg');
+
+            if (audio) {
+                audio.addEventListener('loadedmetadata', () => {
+                    durationText.textContent = formatTime(audio.duration);
+                    timeline.max = Math.floor(audio.duration);
+                });
+
+                audio.addEventListener('timeupdate', () => {
+                    timeline.value = Math.floor(audio.currentTime);
+                    currentTimeText.textContent = formatTime(audio.currentTime);
+                });
+
+                if (timeline) {
+                    timeline.addEventListener('input', () => {
+                        audio.currentTime = timeline.value;
+                    });
+                }
+
+                audio.addEventListener('ended', () => {
+                    if (svg) svg.innerHTML = `<path d="${playPath}"/>`;
+                    timeline.value = 0;
+                    currentTimeText.textContent = "0:00";
                 });
             }
-
-            audio.addEventListener('ended', () => {
-                if (svg) svg.innerHTML = `<path d="${playPath}"/>`;
-                timeline.value = 0;
-                currentTimeText.textContent = "0:00";
-            });
-        }
-    });
-</script>
-
+        });
+    </script>
 
 </body>
 </html>

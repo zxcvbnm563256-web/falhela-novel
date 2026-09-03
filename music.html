@@ -263,60 +263,71 @@
     </div>
 
     <!-- برمجة تشغيل الصوت وتحديث شريط التقدم تلقائياً -->
-    <script>
-        const audio = document.getElementById('mainAudio');
-        const playBtn = document.getElementById('playBtn');
-        const playIcon = document.getElementById('playIcon');
-        const currentTimeText = document.getElementById('currentTime');
-        const durationText = document.getElementById('duration');
-        const timeline = document.getElementById('timeline');
+<script>
+    const playPath = "M8 5v14l11-7z";
+    const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 
-        // مسارات أيقونات التشغيل والإيقاف المؤقت (SVG)
-        const playPath = "M8 5v14l11-7z";
-        const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.innerHTML = `<path d="${pausePath}"/>`;
-            } else {
-                audio.pause();
-                playIcon.innerHTML = `<path d="${playPath}"/>`;
+    function togglePlayAudio(audioId, btnElement) {
+        const audio = document.getElementById(audioId);
+        const svg = btnElement.querySelector('svg');
+
+        document.querySelectorAll('audio').forEach(a => {
+            if (a.id !== audioId) {
+                a.pause();
+                const otherBtn = a.closest('.song-card').querySelector('.play-btn svg');
+                if (otherBtn) otherBtn.innerHTML = `<path d="${playPath}"/>`;
             }
+        });
+
+        if (audio.paused) {
+            audio.play();
+            svg.innerHTML = `<path d="${pausePath}"/>`;
+        } else {
+            audio.pause();
+            svg.innerHTML = `<path d="${playPath}"/>`;
         }
+    }
 
-        // تنسيق الوقت بالدقائق والثواني بشكل نظيف
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return "0:00";
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    document.querySelectorAll('.song-card').forEach(card => {
+        const audio = card.querySelector('audio');
+        const durationText = card.querySelector('.duration-time');
+        const currentTimeText = card.querySelector('.current-time');
+        const timeline = card.querySelector('.timeline');
+        const svg = card.querySelector('.play-btn svg');
+
+        if (audio) {
+            audio.addEventListener('loadedmetadata', () => {
+                durationText.textContent = formatTime(audio.duration);
+                timeline.max = Math.floor(audio.duration);
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                timeline.value = Math.floor(audio.currentTime);
+                currentTimeText.textContent = formatTime(audio.currentTime);
+            });
+
+            if (timeline) {
+                timeline.addEventListener('input', () => {
+                    audio.currentTime = timeline.value;
+                });
+            }
+
+            audio.addEventListener('ended', () => {
+                if (svg) svg.innerHTML = `<path d="${playPath}"/>`;
+                timeline.value = 0;
+                currentTimeText.textContent = "0:00";
+            });
         }
+    });
+</script>
 
-        // تحديث البيانات عند تحميل الأغنية
-        audio.addEventListener('loadedmetadata', () => {
-            durationText.textContent = formatTime(audio.duration);
-            timeline.max = Math.floor(audio.duration);
-        });
-
-        // تحديث شريط التقدم والوقت الحالي أثناء التشغيل
-        audio.addEventListener('timeupdate', () => {
-            timeline.value = Math.floor(audio.currentTime);
-            currentTimeText.textContent = formatTime(audio.currentTime);
-        });
-
-        // السماح للمستخدم بتقديم أو تأخير الأغنية من الشريط بنفسه
-        timeline.addEventListener('input', () => {
-            audio.currentTime = timeline.value;
-        });
-
-        // إعادة الزر لشكل التشغيل عند انتهاء الأغنية تماماً
-        audio.addEventListener('ended', () => {
-            playIcon.innerHTML = `<path d="${playPath}"/>`;
-            timeline.value = 0;
-            currentTimeText.textContent = "0:00";
-        });
-    </script>
 
 </body>
 </html>

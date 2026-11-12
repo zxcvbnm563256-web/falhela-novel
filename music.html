@@ -33,11 +33,48 @@
             text-decoration: none;
             font-size: 15px;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             transition: transform 0.3s ease;
         }
         .back-btn:hover {
             transform: translateX(5px);
+        }
+
+        /* تنسيق خانة البحث */
+        .search-container {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 15px;
+            background-color: #0f0f0f;
+            border: 1px solid #222222;
+            border-radius: 12px;
+            color: #ffffff;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-input::placeholder {
+            color: #666666;
+        }
+
+        .search-input:focus {
+            border-color: #00ff7f;
+            box-shadow: 0 0 12px rgba(0, 255, 127, 0.25);
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            color: #777777;
+            font-size: 15px;
+            margin-top: 20px;
         }
 
         /* كرت الأغنية الاحترافي */
@@ -188,6 +225,13 @@
         
         <a href="index.html" class="back-btn">◀ العودة للمنصة</a>
 
+        <!-- خانة البحث عن الأغاني -->
+        <div class="search-container">
+            <input type="text" id="songSearch" class="search-input" placeholder="ابحث عن اسم الأغنية أو الكاتب..." onkeyup="filterSongs()">
+        </div>
+
+        <p id="noResultsMessage" class="no-results">لا توجد أغاني مطابقة لبحثك.</p>
+
         <!-- الأغنية الأولى -->
         <div class="song-card">
             <div class="track-cover-container">
@@ -237,7 +281,33 @@
                         <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
                     </div>
                 </div>
+<!-- الأغنية الرابعة -->
+        <div class="song-card">
+            <div class="track-cover-container">
+                <img src="./song4.png" alt="Cover" class="track-cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100%\' height=\'100%\' fill=\'%23090909\'/><text x=\'50%\' y=\'55%\' font-size=\'7\' fill=\'%23333\' text-anchor=\'middle\' font-family=\'sans-serif\'>NO COVER</text></svg>'">
+            </div>
 
+            <h2 class="song-title">Title: BORN FROM THE VOID</h2>
+            <p class="artist-name">Writer: Maha Abdul Rahman/Adam George/Mark Wardat</p>
+            
+            <audio id="audio4" src="./shadow.mp3"></audio>
+
+            <div class="custom-player">
+                <div class="player-controls">
+                    <button class="play-btn" onclick="togglePlayAudio('audio4', this)">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+
+                    <div class="time-display">
+                        <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
+                    </div>
+                </div>
+
+                <div class="timeline-container">
+                    <input type="range" class="timeline" value="0" min="0" step="1">
+                </div>
+            </div>
+        </div>
                 <div class="timeline-container">
                     <input type="range" class="timeline" value="0" min="0" step="1">
                 </div>
@@ -246,8 +316,31 @@
 
     </div>
 
-    <!-- برمجة المشغل -->
+    <!-- برمجة المشغل والبحث -->
     <script>
+        // دالة البحث الفوري عن الأغاني
+        function filterSongs() {
+            const input = document.getElementById('songSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.song-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.querySelector('.song-title').textContent.toLowerCase();
+                const artist = card.querySelector('.artist-name').textContent.toLowerCase();
+
+                if (title.includes(input) || artist.includes(input)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResultsMessage');
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // برمجة مشغل الصوت
         const playPath = "M8 5v14l11-7z";
         const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 

@@ -1,16 +1,19 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://falhla.pages.dev/</loc>
   </url>
-
+  <url>
+    <loc>https://falhla.pages.dev/novels</loc>
+  </url>
   <url>
     <loc>https://falhla.pages.dev/characters</loc>
   </url>
-
   <url>
-    <loc>https://falhla.pages.dev/chapters-falhela</loc>
+    <loc>https://falhla.pages.dev/music</loc>
   </url>
-
+  <url>
+    <loc>https://falhla.pages.dev/definitions</loc>
+  </url>
 </urlset>
